@@ -4,20 +4,52 @@
 
     <script type="text/javascript">
     jQuery(document).ready(function($){
+
+        // load all relevant data first and prepare an intermediate array
+
         var github_logo_folders = 'https://api.github.com/repos/endofline/sabah.io/contents/logos/';
         var github_raw_url = 'https://raw.githubusercontent.com/endofline/sabah.io/master/'
         
         $.getJSON(github_logo_folders, function(folderlist){
+            var image_store = [];
+
             $.each(folderlist, function(i, folderobj){
-                console.log(folderobj);
-
-                var thumbnail_path = github_raw_url + folderobj.path + '/small.png';
-                var img = $('<img src="' + thumbnail_path + '" />');
-
-                img.appendTo($('#filmstrip'));
+                image_store.push({
+                    'thumbnail-path': github_raw_url + folderobj.path + '/small.png',
+                });
             });
+
+            render_images(image_store);
+        })
+        .fail(function(e){
+            console.log('something went wrong fetching data');
         });
+
+        function render_images(image_store)
+        {
+            // randomly load images into the thumbnail grid
+
+            var image_count = image_store.length;
+
+            console.log(image_count, ' loaded');
+
+            if(image_count > 0)
+            {
+                $.each($('#thumbnail-grid .thumbnail'), function(enumeration, thumbnailElement){
+                    var store_id = Math.floor(Math.random() * image_count); // use a better random number generator and tie it with votes?
+
+                    var imageObj = image_store[store_id];
+
+                    $(thumbnailElement).css('background-image', 'url(' + imageObj['thumbnail-path'] + ')');
+                });
+            }
+            else
+            {
+                console.log('nothing to display');
+            }
+        }
         
+
     });
     </script>
     <style>
@@ -26,9 +58,53 @@
         margin:5px;
         border:1px solid black;
     }
+
+    #thumbnail-grid
+    {
+        float:left;
+        width:450px;
+        margin:0;
+        padding:0;
+        border:1px solid black;
+    }
+    #thumbnail-grid .thumbnail
+    {
+        float:left;
+        box-sizing: border-box;
+        width:150px;
+        height:150px;
+
+        border:1px solid black;
+        background-size:contain;
+    }
+    #thumbnail-grid .thumbnail:nth-child(3n+1)
+    {
+        clear:left;
+    }
     </style>
 </head>
 <body>
+    <div id="thumbnail-grid">
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+        <div class="thumbnail">
+        </div>
+    </div>
+
     <div id="filmstrip">
     </div>
 </body>

@@ -49,24 +49,6 @@
             }
         }
 
-        function make_targetable(selector)
-        {
-            var counter = 0;
-            $(selector).each(function(i, element){
-                var $element = $(element);
-                if(!$element.prop('id'))
-                {
-                    var theId = 'target-' + counter;
-                    $element.prop('id', theId);
-                    $element.prop('href', '#' + theId);
-                    counter++;
-
-                    console.log($element);
-                }
-            });
-        }
-
-        make_targetable('#thumbnail-grid .thumbnail');
     });
     </script>
 
@@ -111,6 +93,10 @@
         background-size:contain;
         overflow:hidden;
     }
+    #thumbnail-grid .thumbnail:nth-child(3n+1)
+    {
+        clear:left;
+    }
     #thumbnail-grid .thumbnail .label
     {
         box-sizing: border-box;
@@ -131,69 +117,60 @@
     {
         border:1px solid #333333;
     }
-    #thumbnail-grid .thumbnail:target
-    {
-        border:1px solid #000000;
-    }
-    #thumbnail-grid .thumbnail:hover .label,
-    #thumbnail-grid .thumbnail:target .label
+    #thumbnail-grid .thumbnail:hover .label
     {
         top:100px;
         opacity: 0.9;
-    }
-    #thumbnail-grid .thumbnail:nth-child(3n+1)
-    {
-        clear:left;
     }
     </style>
 </head>
 <body>
     <div id="thumbnail-grid">
-        <a class="thumbnail">
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
-        <a class="thumbnail">
+        </div>
+        <div class="thumbnail">
             <div class="label">
                 Hello World!
             </div>
-        </a>
+        </div>
     </div>
 
     <h1>sabah.io</h1>

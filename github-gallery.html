@@ -49,6 +49,28 @@
             }
         }
 
+        // clicking/tapping will "pin" the label
+
+        var $currentPinned = false;
+        $('div.thumbnail').click(function(e){
+            var $element = $(this);
+
+            if($currentPinned)
+            {
+                $currentPinned.removeClass('pinned');
+
+                if($currentPinned[0] == $element[0])
+                {
+                    $currentPinned = false;
+                    return false;
+                }
+            }
+
+            $currentPinned = $element;
+            $currentPinned.addClass('pinned');
+            console.log('on');
+        });
+
     });
     </script>
 
@@ -113,14 +135,25 @@
         opacity: 0.3;
         transition: top 0.5s, opacity 0.5s;
     }
-    #thumbnail-grid .thumbnail:hover
+    #thumbnail-grid .thumbnail:hover,
+    #thumbnail-grid .thumbnail.pinned
     {
         border:1px solid #333333;
     }
-    #thumbnail-grid .thumbnail:hover .label
+    #thumbnail-grid .thumbnail:hover .label,
+    #thumbnail-grid .thumbnail.pinned .label
     {
         top:100px;
         opacity: 0.9;
+    }
+    #thumbnail-grid .thumbnail .label .hide-pinned
+    {
+        float:right;
+        display:none;
+    }
+    #thumbnail-grid .thumbnail.pinned .label .hide-pinned
+    {
+        display:block;
     }
     </style>
 </head>
@@ -128,46 +161,55 @@
     <div id="thumbnail-grid">
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>
         <div class="thumbnail">
             <div class="label">
+                <div class="hide-pinned">unpin</div>
                 Hello World!
             </div>
         </div>

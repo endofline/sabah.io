@@ -4,15 +4,15 @@
 
     <script type="text/javascript">
     jQuery(document).ready(function($){
-        var github_json_files = 'https://api.github.com/repositories/24134487/contents/images';
-        var github_raw_url = 'https://raw.githubusercontent.com/endofline/sabah-io-logos/gh-pages/'
+        var github_logo_folders = 'https://api.github.com/repos/endofline/sabah.io/contents/logos/';
+        var github_raw_url = 'https://raw.githubusercontent.com/endofline/sabah.io/master/'
         
-        $.getJSON(github_json_files, function(filelist){
-            $.each(filelist, function(i, fileobj){
-                console.log(fileobj);
+        $.getJSON(github_logo_folders, function(folderlist){
+            $.each(folderlist, function(i, folderobj){
+                console.log(folderobj);
 
-                var source_path = github_raw_url + fileobj.path;
-                var img = $('<img src="' + source_path + '" />');
+                var thumbnail_path = github_raw_url + folderobj.path + '/small.png';
+                var img = $('<img src="' + thumbnail_path + '" />');
 
                 img.appendTo($('#filmstrip'));
             });

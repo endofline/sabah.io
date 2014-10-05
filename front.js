@@ -3,28 +3,44 @@ jQuery(document).ready(function($){
 	// load all relevant data first and prepare an intermediate array
 
 	var github_logo_folders = 'https://api.github.com/repos/endofline/sabah.io/contents/logos/';
-	var github_raw_url = 'https://raw.githubusercontent.com/endofline/sabah.io/master/'
-	
-	$.getJSON(github_logo_folders, function(folderlist){
-		var image_store = [];
+	var github_raw_url = 'https://raw.githubusercontent.com/endofline/sabah.io/master/'		
+	var github_image_store = false; // uninitialised state
 
-		$.each(folderlist, function(i, folderobj){
-			image_store.push({
-				'thumbnail-path': github_raw_url + folderobj.path + '/small.png',
-			});
-		});
-
-		render_images(image_store);
-	})
-	.fail(function(e){
-		console.log('something went wrong fetching data');
-	});
-
-	function render_images(image_store)
+	function get_github_images(callback)
 	{
+		$.getJSON(github_logo_folders, function(folderlist){
+
+			github_image_store = [];
+
+			$.each(folderlist, function(i, folderobj){
+				github_image_store.push({
+					'thumbnail-path': github_raw_url + folderobj.path + '/small.png',
+				});
+			});
+
+			console.log(callback);
+			if(callback)
+			{
+				callback();
+			}
+		})
+		.fail(function(e){
+			console.log('something went wrong fetching data');
+		});	
+	}
+
+	function render_images()
+	{
+		if(github_image_store === false)
+		{
+			get_github_images(render_images); // callback self after load
+
+			return false;
+		}
+		
 		// randomly load images into the thumbnail grid
 
-		var image_count = image_store.length;
+		var image_count = github_image_store.length;
 
 		console.log(image_count, ' loaded');
 
@@ -33,7 +49,7 @@ jQuery(document).ready(function($){
 			$.each($('#thumbnail-grid .thumbnail'), function(enumeration, thumbnailElement){
 				var store_id = Math.floor(Math.random() * image_count); // use a better random number generator and tie it with votes?
 
-				var imageObj = image_store[store_id];
+				var imageObj = github_image_store[store_id];
 
 				$(thumbnailElement).css('background-image', 'url(' + imageObj['thumbnail-path'] + ')');
 				$(thumbnailElement).css('background-color', Math.floor(Math.random()*16777215).toString(16));
@@ -94,6 +110,8 @@ jQuery(document).ready(function($){
 			'width': (noOfColumns * thumbnailWidth) + 'px',
 			'height': (noOfRows * thumbnailHeight) + 'px'
 		});
+		
+		render_images();
 	});
 	
 	$(window).resize();

@@ -1,0 +1,78 @@
+html,
+body
+{
+	margin:0;
+	padding:0;
+
+	font-size:0.8em;
+	font-family: 'Roboto', sans-serif;
+}
+
+footer
+{
+	clear:both;
+	text-align:right;
+}
+
+/* gallery styles */
+
+#thumbnail-grid
+{
+	width:750px;
+	margin:auto;
+	padding:0;
+	border:1px solid #aaaaaa;
+}
+#thumbnail-grid .thumbnail
+{
+	float:left;
+	box-sizing: border-box;
+	width:150px;
+	height:150px;
+	display:block;
+
+	position:relative;
+	border:1px solid #eaeaea;
+	background-size:contain;
+	overflow:hidden;
+}
+#thumbnail-grid .thumbnail:nth-child(5n+1)
+{
+	clear:left;
+}
+#thumbnail-grid .thumbnail .label
+{
+	box-sizing: border-box;
+	width: inherit;
+	height: inherit;
+	position:absolute;
+
+	padding:5px;
+
+	color:white;
+	background: #333333;
+
+	top:150px;
+	opacity: 0.3;
+	transition: top 0.5s, opacity 0.5s;
+}
+#thumbnail-grid .thumbnail:hover,
+#thumbnail-grid .thumbnail.pinned
+{
+	border:1px solid #333333;
+}
+#thumbnail-grid .thumbnail:hover .label,
+#thumbnail-grid .thumbnail.pinned .label
+{
+	top:100px;
+	opacity: 0.9;
+}
+#thumbnail-grid .thumbnail .label .hide-pinned
+{
+	float:right;
+	display:none;
+}
+#thumbnail-grid .thumbnail.pinned .label .hide-pinned
+{
+	display:block;
+}

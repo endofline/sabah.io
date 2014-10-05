@@ -66,5 +66,35 @@ jQuery(document).ready(function($){
 		$currentPinned.addClass('pinned');
 		console.log('on');
 	});
-
+	
+	var thumbnailWidth = 150;
+	var thumbnailHeight = 150;
+	var $thumbnailCanvas = $('#thumbnail-grid');
+	var $thumbnailTemplate = $('#thumbnail-template').detach();
+	
+	$(window).resize(function(e){
+		var fullWidth = $(window).width();
+		var fullHeight = $(window).height();
+		
+		var noOfColumns = Math.ceil(fullWidth / thumbnailWidth);
+		var noOfRows = Math.ceil(fullHeight / thumbnailHeight);
+		var totalNumberOfThumbnails = noOfColumns * noOfRows;
+		
+		$thumbnailCanvas.empty();
+		
+		for(var i = 0; i < totalNumberOfThumbnails; i++)
+		{
+			var _clone = $thumbnailTemplate.clone();
+			_clone.removeAttr('id').appendTo($thumbnailCanvas);
+		}
+		
+		$thumbnailCanvas.css({
+			'width': (noOfColumns * thumbnailWidth) + 'px',
+			'height': (noOfRows * thumbnailHeight) + 'px',
+			'margin-top': '-' + Math.round(thumbnailHeight/3) + 'px',
+			'margin-left': '-' + Math.round(thumbnailWidth/3) + 'px',
+		});
+	});
+	
+	$(window).resize();
 });

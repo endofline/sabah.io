@@ -18,11 +18,10 @@ footer
 
 #thumbnail-grid
 {
-	width:750px;
-	margin:auto;
-	padding:0;
-	border:1px solid #aaaaaa;
+	position:fixed;
+	z-index:-1000;
 }
+
 #thumbnail-grid .thumbnail
 {
 	float:left;
@@ -35,10 +34,6 @@ footer
 	border:1px solid #eaeaea;
 	background-size:contain;
 	overflow:hidden;
-}
-#thumbnail-grid .thumbnail:nth-child(5n+1)
-{
-	clear:left;
 }
 #thumbnail-grid .thumbnail .label
 {

@@ -18,7 +18,6 @@ jQuery(document).ready(function($){
 				});
 			});
 
-			console.log(callback);
 			if(callback)
 			{
 				callback();
@@ -100,7 +99,7 @@ jQuery(document).ready(function($){
 		
 		for(var i = 0; i < totalNumberOfThumbnails; i++)
 		{
-			var _clone = $thumbnailTemplate.clone();
+			var _clone = $thumbnailTemplate.clone(true);
 			_clone.removeAttr('id').appendTo($thumbnailCanvas);
 		}
 		

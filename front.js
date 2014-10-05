@@ -89,10 +89,10 @@ jQuery(document).ready(function($){
 		}
 		
 		$thumbnailCanvas.css({
+			// 'margin-top': '-' + Math.round(thumbnailHeight/3) + 'px',
+			// 'margin-left': '-' + Math.round(thumbnailWidth/3) + 'px',
 			'width': (noOfColumns * thumbnailWidth) + 'px',
-			'height': (noOfRows * thumbnailHeight) + 'px',
-			'margin-top': '-' + Math.round(thumbnailHeight/3) + 'px',
-			'margin-left': '-' + Math.round(thumbnailWidth/3) + 'px',
+			'height': (noOfRows * thumbnailHeight) + 'px'
 		});
 	});
 	
